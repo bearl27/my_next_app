@@ -1,8 +1,8 @@
 package chat
 
 import (
-    "log"
     "net/http"
+    "log"
 
     "github.com/gorilla/websocket"
 )
@@ -28,17 +28,82 @@ var (
 )
 
 func HandleConnections(w http.ResponseWriter, r *http.Request) {
-    // 既存のhandleConnections関数の内容
+    ws, err := upgrader.Upgrade(w, r, nil)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+
+    client := &Client{conn: ws, send: make(chan []byte, 256)}
+    register <- client
+
+    go client.writePump()
+    client.readPump()
 }
 
 func (c *Client) readPump() {
-    // 既存のreadPump関数の内容
+    defer func() {
+        unregister <- c
+        c.conn.Close()
+    }()
+
+    for {
+        _, message, err := c.conn.ReadMessage()
+        if err != nil {
+            if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
+                log.Printf("error: %v", err)
+            }
+            break
+        }
+        broadcast <- message
+    }
 }
 
 func (c *Client) writePump() {
-    // 既存のwritePump関数の内容
+    defer func() {
+        c.conn.Close()
+    }()
+
+    for {
+        select {
+        case message, ok := <-c.send:
+            if !ok {
+                c.conn.WriteMessage(websocket.CloseMessage, []byte{})
+                return
+            }
+
+            w, err := c.conn.NextWriter(websocket.TextMessage)
+            if err != nil {
+                return
+            }
+            w.Write(message)
+
+            if err := w.Close(); err != nil {
+                return
+            }
+        }
+    }
 }
 
 func HandleMessages() {
-    // 既存のhandleMessages関数の内容
+    for {
+        select {
+        case client := <-register:
+            clients[client] = true
+        case client := <-unregister:
+            if _, ok := clients[client]; ok {
+                delete(clients, client)
+                close(client.send)
+            }
+        case message := <-broadcast:
+            for client := range clients {
+                select {
+                case client.send <- message:
+                default:
+                    close(client.send)
+                    delete(clients, client)
+                }
+            }
+        }
+    }
 }

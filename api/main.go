@@ -2,11 +2,11 @@ package main
 
 import (
     "log"
-    "net/http"
 
     "github.com/bearl27/amida/api/chat"
     "github.com/bearl27/amida/api/memo"
     "github.com/bearl27/amida/api/router"
+    "github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -20,12 +20,14 @@ func main() {
     r := router.SetupRouter()
 
     // WebSocketハンドラーの設定
-    http.HandleFunc("/ws", chat.HandleConnections)
+    r.GET("/ws", func(c *gin.Context) {
+        chat.HandleConnections(c.Writer, c.Request)
+    })
     go chat.HandleMessages()
 
     // HTTPサーバーの起動
     log.Println("Server starting on :8080")
-    err := http.ListenAndServe(":8080", r)
+    err := r.Run(":8080")
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
     }

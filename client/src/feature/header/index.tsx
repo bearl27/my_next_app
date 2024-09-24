@@ -15,9 +15,14 @@ export const Header = () => {
                 <p>Address</p>
             </Link>
 
-            <Link href="/memo">
+            {/* <Link href="/memo">
                 <StickyNote />
                 <p>Memo</p>
+            </Link> */}
+
+            <Link href="/school">
+                <StickyNote />
+                <p>School</p>
             </Link>
         </div>
     );

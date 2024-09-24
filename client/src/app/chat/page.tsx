@@ -12,24 +12,53 @@ interface Message {
   timestamp: number;
 }
 
+interface ReceivedMessage {
+  id: string;
+  text: string;
+  timestamp: number;
+}
+
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([])
   const [inputMessage, setInputMessage] = useState('')
+  const [isConnected, setIsConnected] = useState(false)
   const socket = useRef<WebSocket | null>(null)
   const lastMessageId = useRef<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    socket.current = new WebSocket('ws://localhost:8080/ws')
-    socket.current.onmessage = (event: MessageEvent) => {
-      const receivedMessage = JSON.parse(event.data)
-      addMessageIfNew({
-        id: receivedMessage.id,
-        text: receivedMessage.text,
-        isSelf: false,
-        timestamp: receivedMessage.timestamp || Date.now()
-      })
+    const connectWebSocket = () => {
+      socket.current = new WebSocket('ws://localhost:8080/ws')
+
+      socket.current.onopen = () => {
+        setIsConnected(true)
+        console.log('WebSocket connected')
+      }
+
+      socket.current.onmessage = (event: MessageEvent) => {
+        const receivedMessage: ReceivedMessage = JSON.parse(event.data)
+        addMessageIfNew({
+          id: receivedMessage.id,
+          text: receivedMessage.text,
+          isSelf: false,
+          timestamp: receivedMessage.timestamp || Date.now()
+        })
+      }
+
+      socket.current.onclose = () => {
+        setIsConnected(false)
+        console.log('WebSocket disconnected. Trying to reconnect...')
+        setTimeout(connectWebSocket, 5000)
+      }
+
+      socket.current.onerror = (error) => {
+        console.error('WebSocket error:', error)
+        setIsConnected(false)
+      }
     }
+
+    connectWebSocket()
+
     return () => {
       socket.current?.close()
     }
@@ -52,7 +81,7 @@ export default function Home() {
 
   const sendMessage = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (inputMessage && socket.current) {
+    if (inputMessage && socket.current && isConnected) {
       const messageId = Date.now().toString()
       const timestamp = Date.now()
       const messageToSend = { id: messageId, text: inputMessage, timestamp }
@@ -72,6 +101,9 @@ export default function Home() {
       <Card>
         <CardHeader>
           <CardTitle className="text-center">Real-time Chat</CardTitle>
+          <p className={`text-center ${isConnected ? 'text-green-500' : 'text-red-500'}`}>
+            {isConnected ? 'Connected' : 'Disconnected'}
+          </p>
         </CardHeader>
         <CardContent>
           <div className="h-[400px] w-full rounded-md border p-4 mb-4 overflow-y-auto">
@@ -94,8 +126,9 @@ export default function Home() {
               onChange={(e) => setInputMessage(e.target.value)}
               placeholder="Type a message..."
               className="flex-grow"
+              disabled={!isConnected}
             />
-            <Button type="submit">Send</Button>
+            <Button type="submit" disabled={!isConnected}>Send</Button>
           </form>
         </CardContent>
       </Card>
