@@ -50,5 +50,6 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5",
     "zod": "^3.23.8"
-  }
+  },
+  "packageManager": "pnpm@9.9.0"
 }
