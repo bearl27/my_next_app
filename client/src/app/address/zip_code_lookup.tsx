@@ -4,6 +4,7 @@ import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/comp
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 import { ExclamationTriangleIcon, CheckCircledIcon } from "@radix-ui/react-icons"
 
 interface AddressData {
@@ -75,26 +76,25 @@ const ZipCodeLookup: React.FC = () => {
                 </div>
 
                 {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                        <span className="flex items-center">
-                            <ExclamationTriangleIcon className="h-4 w-4 mr-2" />
-                            {error}
-                        </span>
-                    </div>
+                    <Alert variant="destructive">
+                        <ExclamationTriangleIcon className="h-4 w-4" />
+                        <AlertTitle>エラー</AlertTitle>
+                        <AlertDescription>{error}</AlertDescription>
+                    </Alert>
                 )}
 
                 {addressList.length > 0 && (
-                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                        <span className="flex items-center mb-2">
-                            <CheckCircledIcon className="h-4 w-4 mr-2" />
-                            検索結果:
-                        </span>
-                        <ul className="list-disc list-inside">
-                            {addressList.map((address, index) => (
-                                <li key={index}>{address}</li>
-                            ))}
-                        </ul>
-                    </div>
+                    <Alert>
+                        <CheckCircledIcon className="h-4 w-4" />
+                        <AlertTitle>検索結果:</AlertTitle>
+                        <AlertDescription>
+                            <ul className="list-disc list-inside">
+                                {addressList.map((address, index) => (
+                                    <li key={index}>{address}</li>
+                                ))}
+                            </ul>
+                        </AlertDescription>
+                    </Alert>
                 )}
             </CardContent>
             <CardFooter>
