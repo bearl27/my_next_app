@@ -3,19 +3,12 @@ package main
 import (
     "log"
 
-    "github.com/bearl27/amida/api/chat"
-    "github.com/bearl27/amida/api/memo"
-    "github.com/bearl27/amida/api/router"
+    "github.com/bearl27/my_next_app/api/chat"
+    "github.com/bearl27/my_next_app/api/router"
     "github.com/gin-gonic/gin"
 )
 
 func main() {
-    // メモアプリのデータベース初期化
-    if err := memo.InitDB(); err != nil {
-        log.Fatal(err)
-    }
-    defer memo.CloseDB()
-
     // ルーターの設定
     r := router.SetupRouter()
 

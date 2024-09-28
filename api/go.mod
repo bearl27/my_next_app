@@ -1,4 +1,4 @@
-module github.com/bearl27/amida/api
+module github.com/bearl27/my_next_app/api
 
 go 1.22.1
 

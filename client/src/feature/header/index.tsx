@@ -1,29 +1,12 @@
-import { House, MessageCircle, StickyNote } from "lucide-react";
+import { MessageCircle, StickyNote } from "lucide-react";
 import style from "./index.module.scss";
-import Link from "next/link";
+import Navilink from "./logo";
 
 export const Header = () => {
     return (
         <div className={style.header}>
-            <Link href="/chat">
-                <MessageCircle />
-                <p>Chat</p>
-            </Link>
-
-            <Link href="/address">
-                <House />
-                <p>Address</p>
-            </Link>
-
-            {/* <Link href="/memo">
-                <StickyNote />
-                <p>Memo</p>
-            </Link> */}
-
-            <Link href="/school">
-                <StickyNote />
-                <p>School</p>
-            </Link>
+            <Navilink href="/chat" Icon={MessageCircle} text="Chat" />
+            <Navilink href="/address" Icon={StickyNote} text="Address" />
         </div>
     );
 };
