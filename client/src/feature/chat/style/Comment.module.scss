@@ -1,0 +1,43 @@
+@import '/Users/user/Documents/GitHub/my_next_app/client/src/style/theme.scss';
+.commentContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    &.self {
+      align-items: flex-end;
+    }
+
+    &.other {
+      align-items: flex-start;
+    }
+  }
+
+  .messageBox {
+    max-width: 70%;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+
+    &.self {
+      background-color: $primary;
+      color: $primary-foreground;
+    }
+
+    &.other {
+      background-color: $secondary;
+      color: $secondary-foreground;
+    }
+  }
+
+  .messageText {
+    font-size: $text-sm;
+    line-height: $lineheight-sm;
+    word-break: break-word;
+  }
+
+  .timestamp {
+    font-size: $text-xs;
+    line-height: $lineheight-xs;
+    color: $muted-foreground;
+    margin-top: 0.25rem;
+  }

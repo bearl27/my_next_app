@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, FormEvent } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import Comment from "@/feature/chat/comment"
 
 interface Message {
   id: string;
@@ -108,14 +109,13 @@ export default function Home() {
         <CardContent>
           <div className="h-[400px] w-full rounded-md border p-4 mb-4 overflow-y-auto">
             {messages.map((message) => (
-              <div key={message.id} className={`flex flex-col ${message.isSelf ? 'items-end' : 'items-start'} mb-2`}>
-                <p className={`rounded-lg p-2 max-w-[70%] ${message.isSelf ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-                  {message.text}
-                </p>
-                <span className="text-xs text-gray-500 mt-1">
-                  {formatTimestamp(message.timestamp)}
-                </span>
-              </div>
+              <Comment
+                key={message.id}
+                id={message.id}
+                text={message.text}
+                isSelf={message.isSelf}
+                timestamp={formatTimestamp(message.timestamp)}
+              />
             ))}
             <div ref={messagesEndRef} />
           </div>
