@@ -40,7 +40,7 @@ const TeleCodeLookup: React.FC = () => {
                 setError('該当する会社が見つかりません。');
             }
             setIsLoading(false);
-        }, 1000); // APIの呼び出しをシミュレートするための遅延
+        }, 1000);
     };
 
     return (
@@ -53,15 +53,15 @@ const TeleCodeLookup: React.FC = () => {
                     <Label htmlFor="phonenumber">電話番号</Label>
                     <InputOTP maxLength={10} value={phoneNumber} onChange={handleComplete}>
                         <InputOTPGroup>
-                            {[...Array(10)].map((_, index) => (
-                                <InputOTPSlot key={index} index={index} />
+                            {[...Array(10)].map((_, number) => (
+                                <InputOTPSlot key={number} index={number} />
                             ))}
                         </InputOTPGroup>
                     </InputOTP>
                 </div>
 
                 {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
                         <span className="flex items-center">
                             <ExclamationTriangleIcon className="h-4 w-4 mr-2" />
                             {error}
@@ -70,7 +70,7 @@ const TeleCodeLookup: React.FC = () => {
                 )}
 
                 {companyName && (
-                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
                         <span className="flex items-center mb-2">
                             <CheckCircledIcon className="h-4 w-4 mr-2" />
                             検索結果:

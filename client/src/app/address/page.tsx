@@ -1,9 +1,9 @@
 'use client'
 
 import React from 'react';
-import ZipCodeLookup from './zip_code_lookup';
-import TeleCodeLookup from './tele_code_lookup';
-import NearestStationLookup from './nearest_station_lookup';
+import ZipCodeLookup from '../../feature/address/zip_code_lookup';
+import TeleCodeLookup from '../../feature/address/tele_code_lookup';
+import NearestStationLookup from '../../feature/address/nearest_station_lookup';
 
 const App: React.FC = () => {
     return (

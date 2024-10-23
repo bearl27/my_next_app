@@ -99,7 +99,7 @@ const NearestStationLookup: React.FC = () => {
                 </div>
 
                 {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
                         <span className="flex items-center">
                             <ExclamationTriangleIcon className="h-4 w-4 mr-2" />
                             {error}
@@ -108,7 +108,7 @@ const NearestStationLookup: React.FC = () => {
                 )}
 
                 {addressData && (
-                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
                         <span className="flex items-center mb-2">
                             <CheckCircledIcon className="h-4 w-4 mr-2" />
                             検索結果:
@@ -122,7 +122,7 @@ const NearestStationLookup: React.FC = () => {
                 )}
 
                 {stationData && (
-                    <div className="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+                    <div className="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative">
                         <span className="flex items-center mb-2">
                             <CheckCircledIcon className="h-4 w-4 mr-2" />
                             最寄り駅情報:
@@ -130,7 +130,7 @@ const NearestStationLookup: React.FC = () => {
                         <ul className="list-disc list-inside">
                             <li>駅名: {stationData.name}</li>
                             <li>路線: {stationData.line}</li>
-                            <li>距離: 約{Math.round(parseFloat(stationData.distance))}m</li>
+                            <li>距離: 約{`${Math.round(Number(stationData.distance))}m`}</li>
                         </ul>
                     </div>
                 )}

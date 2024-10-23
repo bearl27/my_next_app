@@ -33,7 +33,7 @@ export default function Home() {
 
       socket.current.onopen = () => {
         setIsConnected(true)
-        console.log('WebSocket connected')
+        //console.log('WebSocket connected')
       }
 
       socket.current.onmessage = (event: MessageEvent) => {
@@ -48,7 +48,7 @@ export default function Home() {
 
       socket.current.onclose = () => {
         setIsConnected(false)
-        console.log('WebSocket disconnected. Trying to reconnect...')
+        //console.log('WebSocket disconnected. Trying to reconnect...')
         setTimeout(connectWebSocket, 5000)
       }
 
