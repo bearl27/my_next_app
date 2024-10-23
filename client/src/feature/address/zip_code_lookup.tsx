@@ -29,7 +29,7 @@ const ZipCodeLookup: React.FC = () => {
     };
 
     return (
-        <Card className="w-full max-w-md mx-auto">
+        <Card className= "w-full max-w-md mx-auto">
             <CardHeader>
                 <CardTitle>郵便番号検索</CardTitle>
             </CardHeader>

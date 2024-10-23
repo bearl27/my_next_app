@@ -65,9 +65,9 @@ export default function Home() {
     }
   }, [])
 
-  useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+  // useEffect(() => {
+  //   scrollToBottom()
+  // }, [messages])
 
   const addMessageIfNew = (newMessage: Message) => {
     if (newMessage.id !== lastMessageId.current) {
