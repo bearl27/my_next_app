@@ -1,4 +1,4 @@
-type Movie {
+type Movie  = {
     id:string;
     title:string;
     img:string;
@@ -9,7 +9,7 @@ type Movie {
     publisherId:string;
 }
 
-type Publisher{
+type Publisher = {
     id:string;
     name:string;
     img:string;

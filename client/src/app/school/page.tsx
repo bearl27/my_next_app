@@ -23,7 +23,16 @@ import {
     CommandShortcut,
 } from "@/components/ui/command"
 
-const universities = [
+interface University {
+    value: string;
+    label: string;
+}
+
+interface FormValues {
+    school_name: string;
+}
+
+const universities: University[] = [
     { value: "tokyo", label: "東京大学" },
     { value: "kyoto", label: "京都大学" },
     { value: "osaka", label: "大阪大学" },
@@ -31,24 +40,24 @@ const universities = [
     { value: "nagoya", label: "名古屋大学" },
 ];
 
-const SchoolInfo = () => {
-    const [selectedUniversity, setSelectedUniversity] = useState("");
+const SchoolInfo: React.FC = () => {
+    const [selectedUniversity, setSelectedUniversity] = useState<string>("");
 
-    const form = useForm({
+    const form = useForm<FormValues>({
         defaultValues: {
             school_name: "",
         },
     });
 
-    const handleSubmit = (data) => {
-        console.log(data);
+    const handleSubmit = (data: FormValues): void => {
+        //console.log(data);
         // ここで保存処理を行う
     };
 
     const style = {
         card: "w-full max-w-md mx-auto",
         content: "space-y-4",
-    };
+    } as const;
 
     return (
         <Card className={style.card}>
@@ -73,7 +82,7 @@ const SchoolInfo = () => {
                                                     <CommandItem
                                                         key={university.value}
                                                         value={university.value}
-                                                        onSelect={(currentValue) => {
+                                                        onSelect={(currentValue: string) => {
                                                             setSelectedUniversity(currentValue);
                                                             form.setValue("school_name", currentValue);
                                                         }}

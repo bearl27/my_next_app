@@ -1,8 +1,7 @@
-
-const youtubePage = () => {
+export default function Page() {
     return (
         <div>
-        <h1>Youtube Page</h1>
+            <h1>Youtube Page</h1>
         </div>
     );
 }

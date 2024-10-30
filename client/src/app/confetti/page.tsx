@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ReactConfetti from "react-confetti";
 
-export function ConfettiComponent() {
+export default function Page() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [buttonEnabled, setButtonEnabled] = useState(true);
 
@@ -62,5 +62,3 @@ export function ConfettiComponent() {
     </div>
   );
 }
-
-export default ConfettiComponent;
