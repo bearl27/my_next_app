@@ -1,0 +1,16 @@
+@use '@/style/theme.scss';
+@use '@/style/utils.scss';
+
+.header {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  color: theme.$foreground;
+  background: theme.$accent;
+  padding: 1em 1em 0.5em 2em;
+  @include utils.space-x(1em);
+}
+
+.item{
+    padding: 2em 1em 0.5em 2em;
+}
