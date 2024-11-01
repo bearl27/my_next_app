@@ -10,6 +10,7 @@ export const Header = () => {
             <Navilink href="/address" Icon={StickyNote} text="Address" />
             <Navilink href="/school" Icon={School} text="School" />
             <Navilink href="/confetti" Icon={Circle} text="Confetti" />
+            <Navilink href="/imageup" Icon={Circle} text="ImageUp" />
         </div>
     );
 };

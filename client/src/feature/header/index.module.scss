@@ -10,6 +10,7 @@
   @include utils.padding-y(1em);
   @include utils.padding-x(2em);
   @include utils.space-x(2em);
+  z-index: 1000;
 
   .link_button {
     @include utils.flex-center;
