@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, FormEvent } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import Comment from "@/feature/chat/comment"
+import Comment from "@/features/chat/comment"
 
 interface Message {
   id: string;

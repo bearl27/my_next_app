@@ -60,6 +60,7 @@ const SchoolInfo: React.FC = () => {
     } as const;
 
     return (
+        <>
         <Card className={style.card}>
             <CardHeader>
                 <CardTitle>学校情報</CardTitle>
@@ -102,6 +103,7 @@ const SchoolInfo: React.FC = () => {
                 </Form>
             </CardContent>
         </Card>
+        </>
     );
 };
 

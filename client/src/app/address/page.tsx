@@ -1,9 +1,10 @@
 'use client'
 
 import React from 'react';
-import ZipCodeLookup from '../../feature/address/zip_code_lookup';
-import TeleCodeLookup from '../../feature/address/tele_code_lookup';
-import NearestStationLookup from '../../feature/address/nearest_station_lookup';
+import ZipCodeLookup from '../../features/address/zip_code_lookup';
+import TeleCodeLookup from '../../features/address/tele_code_lookup';
+import NearestStationLookup from '../../features/address/nearest_station_lookup';
+import { MailIcon } from '../../features/header/components/mail';
 
 const App: React.FC = () => {
     return (

@@ -1,6 +1,6 @@
 import style from "./index.module.scss";
-import { Circle, Bookmark  } from 'lucide-react';
-import { MailIcon } from "./components/mail";
+import { Circle, Bookmark, Book } from 'lucide-react';
+import { MailIcon } from "../header/components/mail";
 import Invite from "@/../public/invite";
 
 
@@ -21,6 +21,9 @@ export const Menubar = () => {
             </a>
             <a href="/confetti" className="style.item">
                 <Circle size={40}/>
+            </a>
+            <a href="/qiita" className="style.item">
+                <Book size={40}/>
             </a>
         </div>
     );

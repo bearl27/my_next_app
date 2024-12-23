@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Header } from "../feature/header";
+import { Header } from "../features/header";
 
 export const metadata: Metadata = {
   title: "BrealApps",

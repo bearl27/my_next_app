@@ -1,0 +1,193 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    min-height: 100vh;
+    background: #f8f9fa;
+  }
+
+  .santaHat {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .hatTop {
+    background: #c41e3a;
+    position: relative;
+    padding: 40px 20px;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    margin: 20px auto;
+    min-height: 400px;
+    box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .pompom {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(40px, 1fr));
+    gap: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top: 100px;
+    justify-content: center;
+    justify-items: center;
+
+    // 1段目（1）
+    & > button:nth-child(1) {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    // 2段目（2,3）
+    & > button:nth-child(2),
+    & > button:nth-child(3) {
+      grid-row: 2;
+    }
+    & > button:nth-child(2) { grid-column: 2; }
+    & > button:nth-child(3) { grid-column: 3; }
+
+    // 3段目（4,5,6）
+    & > button:nth-child(n+4):nth-child(-n+6) {
+      grid-row: 3;
+    }
+    & > button:nth-child(4) { grid-column: 2; }
+    & > button:nth-child(5) { grid-column: 3; }
+    & > button:nth-child(6) { grid-column: 4; }
+
+    // 4段目（7-10）
+    & > button:nth-child(n+7):nth-child(-n+10) {
+      grid-row: 4;
+    }
+    & > button:nth-child(7) { grid-column: 1; }
+    & > button:nth-child(8) { grid-column: 2; }
+    & > button:nth-child(9) { grid-column: 3; }
+    & > button:nth-child(10) { grid-column: 4; }
+
+    // 5段目（11-14）
+    & > button:nth-child(n+11):nth-child(-n+14) {
+      grid-row: 5;
+    }
+    & > button:nth-child(11) { grid-column: 1; }
+    & > button:nth-child(12) { grid-column: 2; }
+    & > button:nth-child(13) { grid-column: 3; }
+    & > button:nth-child(14) { grid-column: 4; }
+
+    // 6段目（15-19）
+    & > button:nth-child(n+15):nth-child(-n+19) {
+      grid-row: 6;
+    }
+    & > button:nth-child(15) { grid-column: 1; }
+    & > button:nth-child(16) { grid-column: 2; }
+    & > button:nth-child(17) { grid-column: 3; }
+    & > button:nth-child(18) { grid-column: 4; }
+    & > button:nth-child(19) { grid-column: 5; }
+
+    // 7段目（20-24）
+    & > button:nth-child(n+20):nth-child(-n+24) {
+      grid-row: 7;
+    }
+    & > button:nth-child(20) { grid-column: 1; }
+    & > button:nth-child(21) { grid-column: 2; }
+    & > button:nth-child(22) { grid-column: 3; }
+    & > button:nth-child(23) { grid-column: 4; }
+    & > button:nth-child(24) { grid-column: 5; }
+    & > button:nth-child(25) { grid-column: 3; grid-row: 8; }
+
+    // 中央揃えのための擬似要素
+    &::before {
+      content: "";
+      grid-column: 1;
+      grid-row: 2;
+    }
+    &::after {
+      content: "";
+      grid-column: 4;
+      grid-row: 2;
+    }
+  }
+
+  .box {
+    width: 100%;
+    max-width: 40px;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 4px;
+      height: 4px;
+      background: #c41e3a;
+      border-radius: 50%;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &.open {
+      background: #198754;
+      color: white;
+      border-color: #157347;
+
+      &::before {
+        background: white;
+      }
+    }
+  }
+
+  .hatBrim {
+    background: white;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: -1px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .santaHat {
+      max-width: 95vw;
+    }
+
+    .calendar {
+      gap: 6px;
+      padding: 10px;
+    }
+
+    .box {
+      font-size: 0.8rem;
+    }
+  }

@@ -4,15 +4,18 @@ import React, { useState } from 'react';
 import { Mail, MailOpen } from 'lucide-react';
 
 interface MailIconProps {
-    count: number;
+    count?: number;
     size?: number;
 }
 
 export const MailIcon = (p: MailIconProps) => {
     const [hovered, setHovered] = useState(false);
-
+    const count = p.count || 0;
+    const iconSize = p.size || 24;
+    const badgeSize = Math.max(iconSize * 0.45, 16);
+    const fontSize = Math.max(iconSize * 0.25, 10);
+    const offset = Math.max(iconSize * 0.15, 6);
     return (
-
         <div>
             <div
                 style={{ position: 'relative', display: 'inline-block' }}
@@ -21,31 +24,31 @@ export const MailIcon = (p: MailIconProps) => {
             >
                 {hovered ? (
                     <MailOpen
-                        size={p.size}
-                        color="#333333"
+                        size={iconSize}
                     />
                 ) : (
                     <Mail
-                        size={p.size}
-                        color="#333333"
+                        size={iconSize}
                     />
                 )}
-                {p.count > 0 && (
+                {count > 0 && (
                     <div
                         style={{
                             position: 'absolute',
-                            top: -9,
-                            right: -9,
+                            top: -offset,
+                            right: -offset,
                             backgroundColor: '#E74C3C',
                             color: 'white',
                             borderRadius: '50%',
-                            padding: '2px',
-                            fontSize: '12px',
-                            minWidth: '20px',
+                            padding: '4px',
+                            fontSize: `${fontSize}px`,
+                            minWidth: `${badgeSize}px`,
+                            height: `${badgeSize}px`,
+                            lineHeight: `${badgeSize - 8}px`,
                             textAlign: 'center'
                         }}
                     >
-                        {p.count >= 100 ? '99+' : p.count}
+                        {count >= 100 ? '99+' : count}
                     </div>
                 )}
             </div>
